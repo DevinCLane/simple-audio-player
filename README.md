@@ -19,6 +19,12 @@ I benefited from the MDN's guide [Using the Web Audio API](https://developer.moz
         }
 ```
 - If you'd like to load in an audio souce without using the Fetch API you can use the `createMediaElementSource()` method of the `AudioContext`, which creates a new `MediaElementAudioSourceNode` object, to which you can pass in an `<audio>` (or `<video>`) HTML element.
+```
+const audioElement = document.querySelector('audio'); // supposing you have an `audio` element in your HTML with the appropriate file as its `src` attribute.
+
+// expose the HTML audio element as an input node to the our audio context)
+const track = audioContext.createMediaElementSource(audioElement);
+```
 
 - adding a `data` attibute to the `button` allowed for nice managing of state for the on and off functionality of the play button.
 ```
