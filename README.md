@@ -22,7 +22,7 @@ I benefited from the MDN's guide [Using the Web Audio API](https://developer.moz
 ```
 // if you have an `audio` element in your HTML with the appropriate file as its `src` attribute.
 const audioElement = document.querySelector('audio'); 
-// expose the HTML audio element as an input node to the our audio context)
+// expose the HTML audio element as an input node to our audio context
 const track = audioContext.createMediaElementSource(audioElement);
 ```
 
