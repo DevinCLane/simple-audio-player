@@ -8,12 +8,7 @@ const audioElement = document.querySelector('audio');
 // in other words, we grab our audio element and pass it into our audio element into our audio context
 const track = audioContext.createMediaElementSource(audioElement);
 
-// gain
-const gainNode = audioContext.createGain();
-
-// conntect the audio track to the destination node, which is our computer speakers
-track.connect(gainNode).connect(audioContext.destination);
-
+// create our play and pause button
 const playButton = document.querySelector('button');
 
 // play and pause button functionality
@@ -45,6 +40,9 @@ audioElement.addEventListener(
     false
 );
 
+// create a gain node
+const gainNode = audioContext.createGain();
+
 // gain control
 const volumeControl = document.querySelector('#volume');
 
@@ -56,3 +54,24 @@ volumeControl.addEventListener(
     },
     false
 );
+
+// panning
+// doing it with a constructor method just for fun
+const pannerOptions = { pan: 0 }
+const panner = new StereoPannerNode(audioContext, pannerOptions);
+
+// access the panner user control
+const pannerControl = document.querySelector('#panner');
+
+// adjust panning via user input
+pannerControl.addEventListener(
+    "input",
+    () => {
+        panner.pan.value = pannerControl.value;
+    },
+    false
+);
+
+
+// conntect the audio track to the destination node, which is our computer speakers
+track.connect(gainNode).connect(panner).connect(audioContext.destination);
